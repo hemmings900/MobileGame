@@ -38,11 +38,11 @@ public class GameController {
 		mousePosition = new Point(0,0);
 		
 		//Initialize player
-		Texture img = new Texture("badlogic.jpg");
+		Texture img = new Texture("player.png");
 		Texture img2 = new Texture("playerCollision.png");
 		Texture img3 = new Texture("playerJump.png");
 		Sprite playerSprite = new Sprite(new Texture[]{img,img2,img3});
-		player = new PlayerCharacter(0,0,20,playerSprite);
+		player = new PlayerCharacter(0,0,5,playerSprite);
 		jumpTimer = 0;
 		jumpTimeLimit = 30;
 		

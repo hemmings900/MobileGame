@@ -86,7 +86,7 @@ public class BlockController {
 	 * Picks a random block out of available blocks and creates that 
 	 * block at a random position at a random time.
 	 */
-	public void addRandomBlock(int blockSpeed, int timeChance){
+	public void addRandomBlocks(int blockSpeed, int timeChance){
 		//find random X position (Y is left at 0 so it will start at the bottom of the screen)
 		if (rand.nextInt(timeChance) == 1){
 			int randomX = rand.nextInt(Gdx.graphics.getWidth());
