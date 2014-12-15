@@ -21,28 +21,23 @@ import com.mygdx.gamePhysics.CollisionController;
  * render method.
  */
 public class GameController {
-	private SpriteBatch batch;
+
 	private PlayerCharacter player;
 	private Point mousePosition;
-	private BitmapFont font;
 	private BlockController blocks;
-	private int blockCount;
-	//private ShapeRenderer shapes;
 	private CollisionController collisions;
-	private float jumpTimer;
-	private float jumpTimeLimit;
+
 	
 	/*
 	 * Initializes game settings and values.
 	 */
 	public GameController() throws Exception{
 		mousePosition = new Point(0,0);
-		jumpTimer = 0;
-		jumpTimeLimit = 1;
+//		jumpTimer = 0;
+//		jumpTimeLimit = 1;
 		//Initialize rendering tools
-		batch = new SpriteBatch();
-		//shapes = new ShapeRenderer();
-		font = new BitmapFont();	
+//		batch = new SpriteBatch();
+		//shapes = new ShapeRenderer();	
 		
 		//Initialize player
 		Texture img = new Texture("badlogic.jpg");
@@ -53,12 +48,9 @@ public class GameController {
 		
 		//Initialize Blocks
 		blocks = new BlockController(10);
-		blockCount = 0;
 		collisions = new CollisionController();
 		
 	}
-	
-	
 	/*
 	 * Game logic handled in here. Called in main render method.
 	 */
@@ -103,52 +95,23 @@ public class GameController {
 			}
 			player.FollowPoint(mousePosition);
 		}
-	
-	/*
-	 * Does all the drawing. Called in main render method.
-	 */
-	public void DrawGame(){
-		Sprite playerSprite = player.getObjectSprite();
-		if (player.isJumping()){
-			if (jumpTimer > jumpTimeLimit){
-				player.setIsJumping(false);
-				jumpTimer = 0;
-			}else
-				jumpTimer += Gdx.graphics.getDeltaTime();			
-		}
-			
-		//BEGIN BATCH#################
-		batch.begin();//##############
-		//############################	
-		
-		font.draw(batch, "Deleted Blocks"+blockCount, 0, 60);
-		font.draw(batch, "MousePosition " + mousePosition.x +":"+ mousePosition.y, 0, 40);
-		//Draw Player
-		batch.draw(playerSprite.getCurrentFrame(), player.getObjectX(),player.getObjectY());
-		//goes through all blocks and draws them. Makes sure that there are blocks to begin with.
-		if (blocks.getBlocks() != null){
-		for (int i = 0; i < blocks.getBlockCount(); i++){
-			Texture blockImage = blocks.getBlock(i).getObjectSprite().getImage();
-			int blockX = blocks.getBlock(i).getObjectX();
-			int blockY = blocks.getBlock(i).getObjectY();
-			batch.draw(blockImage,blockX,blockY);
-			
-			/*##########################################################
-			 *##	Draws collision rectangles                        ##
-			 *##########################################################
-			shapes.setColor(new Color(Color.CYAN));
-			shapes.setAutoShapeType(true);
-			shapes.begin();
-			Rectangle reckt = blocks.getBlock(i).getRect();
-			Rectangle reckt2 = player.getRect();
-			shapes.rect(reckt.x,reckt.y,reckt.width,reckt.height);
-			shapes.rect(reckt2.x,reckt2.y,reckt2.width,reckt2.height);
-			shapes.end();	
-			*/		
-			}			
-		}		
-		//END BATCH###################
-		batch.end();//################
-		//############################
+	/*###################################################
+	 * Setters and getters for GameController          ##
+	 ###################################################*/
+	public PlayerCharacter getPlayer() {
+		return player;
+	}
+
+	public Point getMousePosition() {
+		return mousePosition;
+	}
+
+	public BlockController getBlocks() {
+		return blocks;
+	}
+
+	public CollisionController getCollisions() {
+		return collisions;
 	}
 }
+

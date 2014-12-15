@@ -8,6 +8,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	private GameController game;
 	private GameTimer timer;
+	private DrawingController draw;
 	public void create () {
 		//Make new Game object. Game logic and drawing handled in this class.
 		try {
@@ -16,6 +17,7 @@ public class MyGdxGame extends ApplicationAdapter {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		draw = new DrawingController();
 		timer = new GameTimer(0.0166);
 	}
 
@@ -25,8 +27,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		//Update game################### 		
-		game.DrawGame();
-				
 		timer.UpdateGameDuration(game);
+		draw.DrawGame(game);
 	}
 }

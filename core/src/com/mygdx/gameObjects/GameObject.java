@@ -106,7 +106,7 @@ public abstract class GameObject {
 
 		
 	/*###################################################
-	 * Setters and getters for GameObject properties.#####
+	 * Setters and getters for GameObject properties.####
 	 ###################################################*/
 
 //Get and set postion values based on X and Y location;
