@@ -93,7 +93,7 @@ public class BlockController {
 	 */
 	public void addRandomBlocks(){
 		//Create array
-		boolean[] newBlockLine =  new boolean[15];
+		boolean[] newBlockLine =  new boolean[7];
 		//Loop through array and add random values
 		for (int i = 0; i < newBlockLine.length; i++){
 			if (rand.nextInt(blockChance) == 1){

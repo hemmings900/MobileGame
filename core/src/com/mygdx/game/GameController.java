@@ -8,6 +8,7 @@ import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -34,20 +35,27 @@ public class GameController {
 	private int blockSpawnTimeLimit;
 	private int gameScore;
 	private boolean gameOver;
+	private Texture background;
+	private int backgroundScroll;
+	private int gameSpeed;
 	
 	/*
 	 * Initializes game settings and values.
 	 */
-	public GameController() throws Exception{
+	public GameController(int newGameSpeed) throws Exception{
 		mousePosition = new Point(0,0);
 		gameScore = 0;
+		gameSpeed = newGameSpeed;
+		//Initialize Background
+		background = new Texture("backgrounds/gameBackground.bmp");
+		background.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
+		backgroundScroll = 0;
 		//Initialize player
 		Texture img = new Texture("gameObjects/player.png");
 		Texture img2 = new Texture("gameObjects/playerCollision.png");
 		Texture img3 = new Texture("gameObjects/playerJump.png");
 		Sprite playerSprite = new Sprite(new Texture[]{img,img2,img3});
 		player = new PlayerCharacter(0,Gdx.graphics.getHeight()-100,5,playerSprite);
-		boolean gameOver = false;
 		//Initialize delay variables
 		jumpTimer = 0;
 		jumpTimeLimit = 30;
@@ -55,7 +63,7 @@ public class GameController {
 		blockSpawnTimeLimit = 50;
 		
 		//Initialize Blocks
-		blocks = new BlockController(3,3);
+		blocks = new BlockController(gameSpeed,3);
 		collisions = new CollisionController();
 		
 	}
@@ -65,6 +73,9 @@ public class GameController {
 	public void updateGame(){
 		mousePosition.x = Gdx.input.getX();
 		mousePosition.y = ((Gdx.input.getY()-Gdx.graphics.getHeight())*-1);
+		backgroundScroll += gameSpeed;
+		if(backgroundScroll > background.getHeight())
+			backgroundScroll = 0;
 		
 		boolean collided = false;
 		
@@ -126,7 +137,7 @@ public class GameController {
 	public PlayerCharacter getPlayer() {
 		return player;
 	}
-
+		
 	public Point getMousePosition() {
 		return mousePosition;
 	}
@@ -141,6 +152,12 @@ public class GameController {
 	
 	public boolean getGameOver(){
 		return gameOver;
+	}
+	public Texture getBackground() {
+		return background;
+	}
+	public int getBackgroundScroll() {
+		return backgroundScroll;
 	}
 }
 

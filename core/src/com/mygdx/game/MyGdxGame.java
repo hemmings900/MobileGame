@@ -20,7 +20,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		menu = new GameMenu();
 		//Make new Game, Game logic and drawing handled in this class.
 		try {
-			game = new GameController();
+			game = new GameController(3);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

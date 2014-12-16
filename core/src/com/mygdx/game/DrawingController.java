@@ -16,12 +16,14 @@ import com.mygdx.gameObjects.Sprite;
 
 public class DrawingController {
 	private SpriteBatch batch;
+	private SpriteBatch bgBatch;
 	private BitmapFont font;
 
 	//Constructor
 	public DrawingController(){
 		font = new BitmapFont();
 		batch = new SpriteBatch();
+		bgBatch = new SpriteBatch();
 	}
 	public void DrawGameMenu(GameMenu menu){
 		GameButton[] buttonsToDraw = menu.GetButtons();		
@@ -50,13 +52,19 @@ public class DrawingController {
 		Sprite playerSprite = player.getObjectSprite();
 		Point mousePosition = game.getMousePosition();
 		BlockController blocks = game.getBlocks();
-
-		//BEGIN BATCH#################
-		batch.begin();//##############
-		//############################	
+		Texture background = game.getBackground();
 		
-		font.draw(batch, "MousePosition " + mousePosition.x +":"+ mousePosition.y, 0, 40);
-		font.draw(batch, "Blocks:"+blocks.getBlocks().size(), 0, 20);
+		//BEGIN BATCH#################
+		//Draw background
+		bgBatch.begin();
+		Point bg = new Point(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+	    bgBatch.draw(background,0,0,0,game.getBackgroundScroll(),bg.x,bg.y);
+		bgBatch.end();
+		//Draw Game
+		batch.begin();	
+//		font.draw(batch, "MousePosition " + mousePosition.x +":"+ mousePosition.y, 0, 40);
+//		font.draw(batch, "Blocks:"+blocks.getBlocks().size(), 0, 20);
+		
 		//Draw Player
 		batch.draw(playerSprite.getCurrentFrame(), player.getObjectX(),player.getObjectY());
 		//goes through all blocks and draws them. Makes sure that there are blocks to begin with.
