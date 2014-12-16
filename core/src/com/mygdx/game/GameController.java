@@ -33,6 +33,7 @@ public class GameController {
 	private int blockSpawnTimer;
 	private int blockSpawnTimeLimit;
 	private int gameScore;
+	private boolean gameOver;
 	
 	/*
 	 * Initializes game settings and values.
@@ -46,7 +47,7 @@ public class GameController {
 		Texture img3 = new Texture("playerJump.png");
 		Sprite playerSprite = new Sprite(new Texture[]{img,img2,img3});
 		player = new PlayerCharacter(0,Gdx.graphics.getHeight()-100,5,playerSprite);
-		
+		boolean gameOver = false;
 		//Initialize delay variables
 		jumpTimer = 0;
 		jumpTimeLimit = 30;
@@ -89,6 +90,7 @@ public class GameController {
 				Rectangle rect2 = player.getRect();
 				if(collisions.isColliding(rect1,rect2)){
 					collided = true;
+					gameOver = true;
 					}
 				}	
 			}
@@ -135,6 +137,10 @@ public class GameController {
 
 	public CollisionController getCollisions() {
 		return collisions;
+	}
+	
+	public boolean getGameOver(){
+		return gameOver;
 	}
 }
 
