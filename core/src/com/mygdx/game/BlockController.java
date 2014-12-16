@@ -105,7 +105,7 @@ public class BlockController {
 		//Loop through array for each true value and add block.
 		for (int i = 0; i < newBlockLine.length; i++){
 			if (newBlockLine[i]){
-				Sprite newSprite = new Sprite("block.png");
+				Sprite newSprite = new Sprite("gameObjects/block.png");
 				BasicBlock newBlock = new BasicBlock(i*newSprite.getImage().getWidth(),
 													 0-newSprite.getImage().getHeight(),
 													 blockSpeed,newSprite);

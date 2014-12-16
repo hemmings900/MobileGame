@@ -42,9 +42,9 @@ public class GameController {
 		mousePosition = new Point(0,0);
 		gameScore = 0;
 		//Initialize player
-		Texture img = new Texture("player.png");
-		Texture img2 = new Texture("playerCollision.png");
-		Texture img3 = new Texture("playerJump.png");
+		Texture img = new Texture("gameObjects/player.png");
+		Texture img2 = new Texture("gameObjects/playerCollision.png");
+		Texture img3 = new Texture("gameObjects/playerJump.png");
 		Sprite playerSprite = new Sprite(new Texture[]{img,img2,img3});
 		player = new PlayerCharacter(0,Gdx.graphics.getHeight()-100,5,playerSprite);
 		boolean gameOver = false;

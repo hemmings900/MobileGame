@@ -17,17 +17,17 @@ public class GameMenu {
 	public GameMenu(){
 		collision = new CollisionController();
 		//Make start game button
-		Sprite startGameSprite = new Sprite("startGame.png");
+		Sprite startGameSprite = new Sprite("menu/startGame.png");
 		Point startGamePosition = new Point(20, Gdx.graphics.getHeight()-80);
 		startGameButton = new GameButton(startGamePosition,startGameSprite);
 		
 		//Make quit game button
-		Sprite quitGameSprite = new Sprite("quitGame.png");
+		Sprite quitGameSprite = new Sprite("menu/quitGame.png");
 		Point quitGamePosition = new Point(20, Gdx.graphics.getHeight()-160);
 		quitGameButton = new GameButton(quitGamePosition,quitGameSprite);
 		
 		//Make leaderboard button
-		Sprite leaderboardSprite = new Sprite("leaderboard.png");
+		Sprite leaderboardSprite = new Sprite("menu/leaderboard.png");
 		Point leaderboardPosition = new Point(20, Gdx.graphics.getHeight()-240);
 		leaderboardButton = new GameButton(leaderboardPosition,leaderboardSprite);
 	}
