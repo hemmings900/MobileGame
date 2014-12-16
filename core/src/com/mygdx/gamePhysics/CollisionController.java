@@ -1,5 +1,7 @@
 package com.mygdx.gamePhysics;
 
+import java.awt.Point;
+
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 
@@ -8,7 +10,7 @@ public class CollisionController {
 	public CollisionController(){
 		
 	}
-	
+	//Check if any two rectangles are in a collision
 	public boolean isColliding(Rectangle box1, Rectangle box2){
 		//Box1 co-ords		
 		//Position
@@ -25,15 +27,23 @@ public class CollisionController {
 		float b2Width = box2.getWidth();
 		float b2Height = box2.getHeight();	
 		
-		if (b1x < b2x + b2Width &&
-			b1x + b1Width > b2x &&
-			b1y < b2y + b2Height &&
-			b1Height + b1y > b2y){
-			return true;
+		if(b1x < b2x + b2Width &&
+		   b1x + b1Width > b2x &&
+		   b1y < b2y + b2Height &&
+		   b1Height + b1y > b2y){
+		   return true;
 		} 
-		else return false;
-
-		
-		
+		else return false;		
 	}
+	
+	public boolean isColliding(Point p, Rectangle box){
+		if(p.x > box.x &&
+		   p.x < box.width &&
+		   p.y > box.y &&
+		   p.y < box.height){
+		   return true;
+		}
+		else return false;
+	}
+	
 }

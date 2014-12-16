@@ -6,31 +6,47 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.gameMenu.GameButton;
+import com.mygdx.gameMenu.GameMenu;
 import com.mygdx.gameObjects.PlayerCharacter;
 import com.mygdx.gameObjects.Sprite;
 
 public class DrawingController {
 	private SpriteBatch batch;
 	private BitmapFont font;
-	//private ShapeRenderer shapes;
+
 	//Constructor
 	public DrawingController(){
 		font = new BitmapFont();
 		batch = new SpriteBatch();
 	}
-	
+	public void DrawGameMenu(GameMenu menu){
+		GameButton[] buttonsToDraw = menu.GetButtons();		
+		//BEGIN BATCH#################
+		batch.begin();//##############
+	    //############################
+		
+		//Draw each button in GameButtons array
+		for(int i = 0; i < buttonsToDraw.length; i++){
+			GameButton button = buttonsToDraw[i];
+			batch.draw(button.getButtonSprite().getCurrentFrame(),
+					   button.getButtonLocation().x,
+					   button.getButtonLocation().y);
+		}
+		
+		//END BATCH###################
+		batch.end();//################
+		//############################
+		
+	}
 	public void DrawGame(GameController game){
 		PlayerCharacter player = game.getPlayer();
 		Sprite playerSprite = player.getObjectSprite();
 		Point mousePosition = game.getMousePosition();
 		BlockController blocks = game.getBlocks();
-//		if (player.isJumping()){
-//			if (jumpTimer > jumpTimeLimit){
-//				player.setIsJumping(false);
-//				jumpTimer = 0;
-//			}else
-//				jumpTimer += Gdx.graphics.getDeltaTime();			
-//		}
+
 		//BEGIN BATCH#################
 		batch.begin();//##############
 		//############################	
@@ -45,20 +61,7 @@ public class DrawingController {
 			Texture blockImage = blocks.getBlock(i).getObjectSprite().getImage();
 			int blockX = blocks.getBlock(i).getObjectX();
 			int blockY = blocks.getBlock(i).getObjectY();
-			batch.draw(blockImage,blockX,blockY);
-			
-			/*##########################################################
-			 *##	Draws collision rectangles                        ##
-			 *##########################################################
-			shapes.setColor(new Color(Color.CYAN));
-			shapes.setAutoShapeType(true);
-			shapes.begin();
-			Rectangle reckt = blocks.getBlock(i).getRect();
-			Rectangle reckt2 = player.getRect();
-			shapes.rect(reckt.x,reckt.y,reckt.width,reckt.height);
-			shapes.rect(reckt2.x,reckt2.y,reckt2.width,reckt2.height);
-			shapes.end();	
-			*/		
+			batch.draw(blockImage,blockX,blockY);	
 			}			
 		}		
 		//END BATCH###################

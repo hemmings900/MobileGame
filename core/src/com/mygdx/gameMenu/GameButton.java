@@ -1,58 +1,47 @@
 package com.mygdx.gameMenu;
 
-import com.badlogic.gdx.graphics.Color;
+import java.awt.Point;
+
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.gameObjects.Sprite;
 
 public class GameButton {
-	private Rectangle buttonRect;
-	private int buttonX;
-	private int buttonY;
-	private String buttonText;
+	private Sprite buttonSprite;
+	private Point buttonLocation;
 	private boolean isPressed;
-	private Color buttonColor;
 	
-	public GameButton(int newX,int newY,String newText,Rectangle newRect){
-		buttonX = newX;
-		buttonY = newY;
-		buttonText = newText;
-		buttonRect = newRect;		
-		buttonColor = Color.LIGHT_GRAY;
+	public GameButton(Point newLocation, Sprite newSprite){
+		buttonSprite = newSprite;
+		buttonLocation = newLocation;
+	}
+	/*
+	 * Gets rectangle of button (This method is also found in Game object)
+	 */
+	public Rectangle getRect(){
+		Rectangle rect = new Rectangle(buttonLocation.x,buttonLocation.y,
+				buttonSprite.getImage().getWidth(),buttonSprite.getImage().getHeight());
+		return rect;
 	}
 	/*
 	 * ############################################
 	 * ##	GETTERS AND SETTERS					 ##
 	 * ############################################
 	 */
-	public Rectangle getButtonRect() {
-		return buttonRect;
+
+	public Sprite getButtonSprite() {
+		return buttonSprite;
 	}
 
-	public void setButtonRect(Rectangle buttonRect) {
-		this.buttonRect = buttonRect;
+	public void setButtonSprite(Sprite buttonSprite) {
+		this.buttonSprite = buttonSprite;
 	}
 
-	public int getButtonX() {
-		return buttonX;
+	public Point getButtonLocation() {
+		return buttonLocation;
 	}
 
-	public void setButtonX(int buttonX) {
-		this.buttonX = buttonX;
-	}
-
-	public int getButtonY() {
-		return buttonY;
-	}
-
-	public void setButtonY(int buttonY) {
-		this.buttonY = buttonY;
-	}
-
-	public String getButtonText() {
-		return buttonText;
-	}
-
-	public void setButtonText(String buttonText) {
-		this.buttonText = buttonText;
+	public void setButtonLocation(Point buttonLocation) {
+		this.buttonLocation = buttonLocation;
 	}
 
 	public boolean isPressed() {
@@ -61,14 +50,6 @@ public class GameButton {
 
 	public void setPressed(boolean isPressed) {
 		this.isPressed = isPressed;
-	}
-
-	public Color getButtonColor() {
-		return buttonColor;
-	}
-
-	public void setButtonColor(Color buttonColor) {
-		this.buttonColor = buttonColor;
 	}
 	
 	

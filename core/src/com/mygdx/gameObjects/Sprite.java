@@ -11,7 +11,7 @@ public class Sprite {
 	
 	/*
 	 * ######################################################################
-	 * ##   	SPRITE CONSTRUCTORS                                       ##
+	 * ##   	SPRITE CONSTRUCTORS                                        ##
 	 * ######################################################################
 	 */
 	//Make new Sprite using location of image file
