@@ -14,13 +14,17 @@ import com.mygdx.gameObjects.Sprite;
  */
 public class BlockController {	
 	private ArrayList<GameObject> blocks; 
-	//private int blockLimit;
+	private int blockSpeed;
+	// chance for block to spawn is based on chance 1 out of X where X is blockChance.
+	private int blockChance;
 	private Random rand;
 	
-	public BlockController(int newBlockLimit){
-//		blockLimit = newBlockLimit;
+	public BlockController(int newBlockSpeed, int newBlockChance){
+
 		rand = new Random();
 		blocks = new ArrayList<GameObject>();
+		blockSpeed = newBlockSpeed;
+		blockChance = newBlockChance;
 	}
 	
 	/*
@@ -58,11 +62,11 @@ public class BlockController {
 		for (int i = 0; i < blocks.size(); i++){
 			if (isBlockOffScreen(blocks.get(i))){
 				blocks.remove(i);
-				//System.out.println("Block removed");
 				}
 			}				
 		}		
 	
+	//Check if block is off the screen.
 	public boolean isBlockOffScreen(GameObject blockToDrop){
 		if (blockToDrop.getObjectY() > Gdx.graphics.getHeight())
 			return true;
@@ -82,18 +86,38 @@ public class BlockController {
 	}
 	
 	/*
-	 * Add a random block at a random position.
-	 * Picks a random block out of available blocks and creates that 
-	 * block at a random position at a random time.
+	 * Fill boolean array with random true or false values.
+	 * Loop through array, if value is true, create a block at Index number * sprite width.
+	 * (Seems redundant to have two loops but when adding extra block types and pickups 
+	 * this should reduce spaghetti code)
 	 */
-	public void addRandomBlocks(int blockSpeed, int timeChance){
-		//find random X position (Y is left at 0 so it will start at the bottom of the screen)
-		if (rand.nextInt(timeChance) == 1){
-			int randomX = rand.nextInt(Gdx.graphics.getWidth());
-			Sprite newSprite = new Sprite("block.png");
-			GameObject newBlock = new BasicBlock(randomX,0-newSprite.getImage().getHeight(),blockSpeed,newSprite);
-			blocks.add(newBlock);
+	public void addRandomBlocks(){
+		//Create array
+		boolean[] newBlockLine =  new boolean[15];
+		//Loop through array and add random values
+		for (int i = 0; i < newBlockLine.length; i++){
+			if (rand.nextInt(blockChance) == 1){
+				newBlockLine[i] = true;
 			}
+			else
+				newBlockLine[i] = false;
+		}
+		//Loop through array for each true value and add block.
+		for (int i = 0; i < newBlockLine.length; i++){
+			if (newBlockLine[i]){
+				Sprite newSprite = new Sprite("block.png");
+				BasicBlock newBlock = new BasicBlock(i*newSprite.getImage().getWidth(),
+													 0-newSprite.getImage().getHeight(),
+													 blockSpeed,newSprite);
+				blocks.add(newBlock);
+			}
+		}		
+//		if (rand.nextInt(timeChance) == 1){
+//			int randomX = rand.nextInt(Gdx.graphics.getWidth());
+//			Sprite newSprite = new Sprite("block.png");
+//			GameObject newBlock = new BasicBlock(randomX,,blockSpeed,newSprite);
+//			blocks.add(newBlock);
+//			}
 	}
 	
 	/*#########################################################
@@ -113,6 +137,22 @@ public class BlockController {
 
 	public void setBlocks(ArrayList<GameObject> blocks) {
 		this.blocks = blocks;
+	}
+
+	public int getBlockSpeed() {
+		return blockSpeed;
+	}
+
+	public void setBlockSpeed(int blockSpeed) {
+		this.blockSpeed = blockSpeed;
+	}
+
+	public int getBlockChance() {
+		return blockChance;
+	}
+
+	public void setBlockChance(int blockChance) {
+		this.blockChance = blockChance;
 	}
 
 //	public int getBlockLimit() {

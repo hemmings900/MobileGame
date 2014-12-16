@@ -30,24 +30,31 @@ public class GameController {
 	private CollisionController collisions;
 	private int jumpTimer;
 	private int jumpTimeLimit;//Jump time limit is not based on amount of timer updates.
+	private int blockSpawnTimer;
+	private int blockSpawnTimeLimit;
+	private int gameScore;
 	
 	/*
 	 * Initializes game settings and values.
 	 */
 	public GameController() throws Exception{
 		mousePosition = new Point(0,0);
-		
+		gameScore = 0;
 		//Initialize player
 		Texture img = new Texture("player.png");
 		Texture img2 = new Texture("playerCollision.png");
 		Texture img3 = new Texture("playerJump.png");
 		Sprite playerSprite = new Sprite(new Texture[]{img,img2,img3});
 		player = new PlayerCharacter(0,0,5,playerSprite);
+		
+		//Initialize delay variables
 		jumpTimer = 0;
 		jumpTimeLimit = 30;
+		blockSpawnTimer = 0;
+		blockSpawnTimeLimit = 50;
 		
 		//Initialize Blocks
-		blocks = new BlockController(10);
+		blocks = new BlockController(3,3);
 		collisions = new CollisionController();
 		
 	}
@@ -57,7 +64,7 @@ public class GameController {
 	public void updateGame(){
 		mousePosition.x = Gdx.input.getX();
 		mousePosition.y = ((Gdx.input.getY()-Gdx.graphics.getHeight())*-1);
-		blocks.addRandomBlock(1,100);
+		
 		boolean collided = false;
 		
 		/*
@@ -65,6 +72,13 @@ public class GameController {
 		 * ##				GAME OBJECT PROCESSING						  ##
 		 * #################################################################
 		 */
+		blockSpawnTimer++;
+		//If time interval is correct, make a row of blocks.
+		if (blockSpawnTimer > blockSpawnTimeLimit){
+			blocks.addRandomBlocks();
+			blockSpawnTimer = 0;
+		}
+		
 		//make sure there are blocks in the array before processing
 		if (blocks.getBlocks() != null){
 			blocks.MoveBlocks();
