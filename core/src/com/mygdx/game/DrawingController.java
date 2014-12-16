@@ -31,12 +31,12 @@ public class DrawingController {
 //			}else
 //				jumpTimer += Gdx.graphics.getDeltaTime();			
 //		}
-			
 		//BEGIN BATCH#################
 		batch.begin();//##############
 		//############################	
 		
 		font.draw(batch, "MousePosition " + mousePosition.x +":"+ mousePosition.y, 0, 40);
+		font.draw(batch, "Blocks:"+blocks.getBlocks().size(), 0, 20);
 		//Draw Player
 		batch.draw(playerSprite.getCurrentFrame(), player.getObjectX(),player.getObjectY());
 		//goes through all blocks and draws them. Makes sure that there are blocks to begin with.

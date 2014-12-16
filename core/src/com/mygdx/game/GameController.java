@@ -45,7 +45,7 @@ public class GameController {
 		Texture img2 = new Texture("playerCollision.png");
 		Texture img3 = new Texture("playerJump.png");
 		Sprite playerSprite = new Sprite(new Texture[]{img,img2,img3});
-		player = new PlayerCharacter(0,0,5,playerSprite);
+		player = new PlayerCharacter(0,Gdx.graphics.getHeight()-100,5,playerSprite);
 		
 		//Initialize delay variables
 		jumpTimer = 0;
@@ -114,11 +114,10 @@ public class GameController {
 		}
 		else{
 			player.getObjectSprite().setCurrentFrame(0);
-		}
-		
-			
-			player.FollowPoint(mousePosition);
-		}
+		}			
+		Point playerPoint = new Point(mousePosition.x,Gdx.graphics.getHeight()-100);
+		player.FollowPoint(playerPoint);
+}
 	/*###################################################
 	 * Setters and getters for GameController          ##
 	 ###################################################*/
