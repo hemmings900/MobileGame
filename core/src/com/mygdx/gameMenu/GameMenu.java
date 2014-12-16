@@ -39,16 +39,19 @@ public class GameMenu {
 	}
 	
 	public void ButtonClick(){
-		if(collision.isColliding(new Point(Gdx.input.getX(),Gdx.input.getY()),
-							     startGameButton.getRect()))
+		if(collision.isColliding(new Point(Gdx.input.getX(),
+										   Gdx.graphics.getHeight()-Gdx.input.getY()),
+								           startGameButton.getRect()))
 			GameStates.State = GameStates.START;
 		else
-		if(collision.isColliding(new Point(Gdx.input.getX(),Gdx.input.getY()),
-								 quitGameButton.getRect()))
+		if(collision.isColliding(new Point(Gdx.input.getX(),
+										   Gdx.graphics.getHeight()-Gdx.input.getY()),
+								           quitGameButton.getRect()))
 			GameStates.State = GameStates.QUIT;
 		else
-		if(collision.isColliding(new Point(Gdx.input.getX(),Gdx.input.getY()), 
-								 leaderboardButton.getRect()))
+		if(collision.isColliding(new Point(Gdx.input.getX(),
+										   Gdx.graphics.getHeight()-Gdx.input.getY()), 
+										   leaderboardButton.getRect()))
 			GameStates.State = GameStates.LEADERBOARD;
 		else
 			GameStates.State = GameStates.MENU;
