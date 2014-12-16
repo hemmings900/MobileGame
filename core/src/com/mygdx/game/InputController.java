@@ -4,6 +4,5 @@ import java.awt.Point;
 
 public class InputController {
 	private Point cursorPos;
-	
 
 }

@@ -38,17 +38,20 @@ public class GameMenu {
 								leaderboardButton};
 	}
 	
-	public void ButtonClick(Point cursorPosition){
-		if(collision.isColliding(cursorPosition,startGameButton.getRect()))
+	public void ButtonClick(){
+		if(collision.isColliding(new Point(Gdx.input.getX(),Gdx.input.getY()),
+							     startGameButton.getRect()))
 			GameStates.State = GameStates.START;
 		else
-		if(collision.isColliding(cursorPosition,quitGameButton.getRect()))
+		if(collision.isColliding(new Point(Gdx.input.getX(),Gdx.input.getY()),
+								 quitGameButton.getRect()))
 			GameStates.State = GameStates.QUIT;
 		else
-		if(collision.isColliding(cursorPosition, leaderboardButton.getRect()))
+		if(collision.isColliding(new Point(Gdx.input.getX(),Gdx.input.getY()), 
+								 leaderboardButton.getRect()))
 			GameStates.State = GameStates.LEADERBOARD;
 		else
 			GameStates.State = GameStates.MENU;
-		
+		System.out.println("-------------------------");
 	}
 }

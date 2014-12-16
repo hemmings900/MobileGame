@@ -77,32 +77,6 @@ public abstract class GameObject {
 					objectSprite.getImage().getWidth(),objectSprite.getImage().getHeight());
 			return rect;
 		}
-	//Make bounding Box based on default Sprite Size
-//	private void makeDefaultBoundingBox(){
-//			Point p1 = new Point(objectX,objectY);
-//			Point p2 = new Point(objectX + objectSprite.getImage().getWidth(), 
-//								 objectY + objectSprite.getImage().getHeight());
-//			boundingBox = new BoundingBox(p1,p2);
-//	}
-	
-	//Move boundingBox
-//	private void updateBoundingBoxPosition(){
-//		boundingBox.setP1(new Point(objectX,objectY));
-//		boundingBox.setP2(new Point(objectX+boundingBox.getWidth(),
-//									objectY+boundingBox.getHeight()));
-//	}
-
-	//Get and set Bounding Box
-	
-	//Make bounding Box based on points specified
-//	public void SetBoundingBox(Point p1, Point p2){
-//		boundingBox = new BoundingBox(p1,p2);
-//	}
-	
-	//Return current Bounding Box
-//	public BoundingBox getBoundingBox(){
-//		return boundingBox;
-//	}
 
 		
 	/*###################################################

@@ -19,7 +19,8 @@ public class GameButton {
 	 */
 	public Rectangle getRect(){
 		Rectangle rect = new Rectangle(buttonLocation.x,buttonLocation.y,
-				buttonSprite.getImage().getWidth(),buttonSprite.getImage().getHeight());
+									   buttonSprite.getImage().getWidth()+buttonLocation.x,
+									   buttonSprite.getImage().getHeight()+buttonLocation.y);
 		return rect;
 	}
 	/*

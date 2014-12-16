@@ -2,6 +2,7 @@ package com.mygdx.gamePhysics;
 
 import java.awt.Point;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 
@@ -37,6 +38,10 @@ public class CollisionController {
 	}
 	
 	public boolean isColliding(Point p, Rectangle box){
+		p.y = Gdx.graphics.getHeight()- p.y;
+		System.out.println("px: "+p.x + " py: "+p.y);
+		System.out.println("Box X: "+box.x+" Y: "+box.y+" Width: "+box.width+" Height: "+box.height);
+		
 		if(p.x > box.x &&
 		   p.x < box.width &&
 		   p.y > box.y &&
