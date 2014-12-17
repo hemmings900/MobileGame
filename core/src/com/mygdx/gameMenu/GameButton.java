@@ -1,9 +1,8 @@
 package com.mygdx.gameMenu;
 
-import java.awt.Point;
-
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.gameObjects.Sprite;
+import com.mygdx.gamePhysics.Point;
 
 public class GameButton {
 	private Sprite buttonSprite;

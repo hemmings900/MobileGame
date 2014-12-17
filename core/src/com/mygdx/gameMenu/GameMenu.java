@@ -1,13 +1,12 @@
 package com.mygdx.gameMenu;
 
-import java.awt.Point;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.GameController;
 import com.mygdx.game.GameStates;
 import com.mygdx.gameObjects.Sprite;
 import com.mygdx.gamePhysics.CollisionController;
+import com.mygdx.gamePhysics.Point;
 
 public class GameMenu {
 	private GameButton startGameButton;

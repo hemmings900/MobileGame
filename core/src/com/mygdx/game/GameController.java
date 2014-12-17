@@ -1,6 +1,5 @@
 package com.mygdx.game;
 
-import java.awt.Point;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 
@@ -22,6 +21,7 @@ import com.mygdx.gameObjects.GameObject;
 import com.mygdx.gameObjects.PlayerCharacter;
 import com.mygdx.gameObjects.Sprite;
 import com.mygdx.gamePhysics.CollisionController;
+import com.mygdx.gamePhysics.Point;
 /*
  * Main Game Logic class, handles most activity that is required to be processed in the
  * render method.

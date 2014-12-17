@@ -1,7 +1,6 @@
 package com.mygdx.game;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import com.badlogic.gdx.ApplicationAdapter;
@@ -22,7 +21,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	//Initialize Game
 	public void create () {
 		//Set applicaiton screen size
-		Gdx.graphics.setDisplayMode(240, 320, false);
+		Gdx.graphics.setDisplayMode(240, 320, true);
 		//Make new Game, Game logic and drawing handled in this class.
 		try {
 			game = new GameController(3);
@@ -32,12 +31,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		}
 		//Make new Game Menu
 		menu = new GameMenu(game);
-		try {
-			score = new GameLeaderboard();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		score = new GameLeaderboard();
 		draw = new DrawingController();
 		timer = new GameTimer(0.0166);
 		
@@ -70,7 +64,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		//Render scoreboard
 		if(GameStates.State == GameStates.LEADERBOARD){
 			draw.DrawScore(score);
-			if(Gdx.input.isKeyPressed(Keys.ESCAPE))
+			if(Gdx.input.isKeyPressed(Keys.ESCAPE) || Gdx.input.isKeyPressed(Keys.BACK))
 				GameStates.State = GameStates.MENU;
 				
 		}

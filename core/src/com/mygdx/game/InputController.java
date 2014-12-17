@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
-import java.awt.Point;
+import com.mygdx.gamePhysics.Point;
+
 
 public class InputController {
 	private Point cursorPos;

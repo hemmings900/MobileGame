@@ -1,7 +1,5 @@
 package com.mygdx.gamePhysics;
 
-import java.awt.Point;
-
 import com.badlogic.gdx.math.Rectangle;
 /*
  * Object that holds bounding box properties.

@@ -1,7 +1,5 @@
 package com.mygdx.game;
 
-import java.awt.Point;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.graphics.Texture;
@@ -14,6 +12,7 @@ import com.mygdx.gameMenu.GameLeaderboard;
 import com.mygdx.gameMenu.GameMenu;
 import com.mygdx.gameObjects.PlayerCharacter;
 import com.mygdx.gameObjects.Sprite;
+import com.mygdx.gamePhysics.Point;
 
 public class DrawingController {
 	private SpriteBatch batch;

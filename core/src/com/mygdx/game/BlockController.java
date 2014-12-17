@@ -1,6 +1,5 @@
 package com.mygdx.game;
 
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -8,6 +7,7 @@ import com.badlogic.gdx.Gdx;
 import com.mygdx.gameObjects.BasicBlock;
 import com.mygdx.gameObjects.GameObject;
 import com.mygdx.gameObjects.Sprite;
+import com.mygdx.gamePhysics.Point;
 /*
  * This class handles all the game blocks. 
  * Handles adding and deleting blocks

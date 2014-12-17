@@ -1,10 +1,9 @@
 package com.mygdx.gameObjects;
 
-import java.awt.Point;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.gamePhysics.BoundingBox;
+import com.mygdx.gamePhysics.Point;
 
 /*
  * 
