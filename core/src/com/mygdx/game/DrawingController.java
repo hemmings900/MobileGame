@@ -83,7 +83,7 @@ public class DrawingController {
 	public void DrawScore(GameLeaderboard score){
 		Point center = new Point(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
 		batch.begin();		
-			font.draw(batch,"High Score: " + GameStates.GameScore,center.x,center.y);
+			font.draw(batch,"High Score: " + GameStates.GameScore,50,center.y);
 		batch.end();
 	}
 }

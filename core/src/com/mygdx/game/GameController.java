@@ -64,7 +64,7 @@ public class GameController {
 		jumpTimer = 0;
 		jumpTimeLimit = 30;
 		blockSpawnTimer = 0;
-		blockSpawnTimeLimit = 60;		
+		blockSpawnTimeLimit = 100;		
 		gameOverTimer = 0;
 		gameOverTimeLimit = 50;
 		
@@ -76,7 +76,7 @@ public class GameController {
 	/*
 	 * Game logic handled in here. Called in main render method.
 	 */
-	public void updateGame() throws FileNotFoundException, UnsupportedEncodingException{
+	public void updateGame(){
 		mousePosition.x = Gdx.input.getX();
 		mousePosition.y = ((Gdx.input.getY()-Gdx.graphics.getHeight())*-1);
 		backgroundScroll += gameSpeed;
@@ -174,10 +174,8 @@ public class GameController {
 		//Initialize delay variables
 		jumpTimer = 0;
 		jumpTimeLimit = 30;
-		blockSpawnTimer = 0;
-		blockSpawnTimeLimit = 50;		
+		blockSpawnTimer = 0;	
 		gameOverTimer = 0;
-		gameOverTimeLimit = 50;
 		
 		//Initialize Blocks
 		blocks = new BlockController(gameSpeed,3);

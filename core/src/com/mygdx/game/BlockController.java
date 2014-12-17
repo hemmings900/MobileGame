@@ -92,8 +92,10 @@ public class BlockController {
 	 * this should reduce spaghetti code)
 	 */
 	public void addRandomBlocks(){
+		Sprite newSprite = new Sprite("gameObjects/block.png");
 		//Create array
-		boolean[] newBlockLine =  new boolean[7];
+		int blocksToGenerate = Gdx.graphics.getWidth()/newSprite.getImage().getWidth();
+		boolean[] newBlockLine =  new boolean[blocksToGenerate];
 		//Loop through array and add random values
 		for (int i = 0; i < newBlockLine.length; i++){
 			if (rand.nextInt(blockChance) == 1){
@@ -105,7 +107,7 @@ public class BlockController {
 		//Loop through array for each true value and add block.
 		for (int i = 0; i < newBlockLine.length; i++){
 			if (newBlockLine[i]){
-				Sprite newSprite = new Sprite("gameObjects/block.png");
+				
 				BasicBlock newBlock = new BasicBlock(i*newSprite.getImage().getWidth(),
 													 0-newSprite.getImage().getHeight(),
 													 blockSpeed,newSprite);
