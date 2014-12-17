@@ -4,19 +4,10 @@ import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Buttons;
-import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.mygdx.gameMenu.GameLeaderboard;
 import com.mygdx.gameObjects.GameObject;
 import com.mygdx.gameObjects.PlayerCharacter;
 import com.mygdx.gameObjects.Sprite;
@@ -47,7 +38,6 @@ public class GameController {
 	private int backgroundScroll;
 	private int gameSpeed;
 	private int startGameSpeed;
-	private GameLeaderboard scoreboard;
 	
 	/*
 	 * Initializes game settings and values.
@@ -57,7 +47,6 @@ public class GameController {
 		gameScore = 0;
 		gameSpeed = newGameSpeed;
 		startGameSpeed = newGameSpeed;
-		scoreboard = new GameLeaderboard();
 		
 		//Initialize Background
 		background = new Texture("backgrounds/gameBackground.bmp");
@@ -75,7 +64,7 @@ public class GameController {
 		jumpTimer = 0;
 		jumpTimeLimit = 30;
 		blockSpawnTimer = 0;
-		blockSpawnTimeLimit = 50;		
+		blockSpawnTimeLimit = 60;		
 		gameOverTimer = 0;
 		gameOverTimeLimit = 50;
 		
@@ -163,7 +152,8 @@ public class GameController {
 		else{
 			player.getObjectSprite().setCurrentFrame(0);
 		}			
-		Point playerPoint = new Point(mousePosition.x,Gdx.graphics.getHeight()-100);
+		Point playerPoint = new Point(mousePosition.x-player.getObjectSprite().getCenterPx().x,
+									  Gdx.graphics.getHeight()-100);
 		if(!gameOver)
 			player.FollowPoint(playerPoint);
 	}

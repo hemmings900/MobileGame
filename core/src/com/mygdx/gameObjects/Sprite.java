@@ -1,7 +1,6 @@
 package com.mygdx.gameObjects;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.gamePhysics.Point;
 
 public class Sprite {

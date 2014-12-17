@@ -5,8 +5,6 @@ import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.gameMenu.GameButton;
 import com.mygdx.gameMenu.GameLeaderboard;
 import com.mygdx.gameMenu.GameMenu;
@@ -52,7 +50,6 @@ public class DrawingController {
 	public void DrawGame(GameController game){
 		PlayerCharacter player = game.getPlayer();
 		Sprite playerSprite = player.getObjectSprite();
-		Point mousePosition = game.getMousePosition();
 		BlockController blocks = game.getBlocks();
 		Texture background = game.getBackground();
 		//####################################

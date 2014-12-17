@@ -1,7 +1,6 @@
 package com.mygdx.gameMenu;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.GameController;
 import com.mygdx.game.GameStates;
 import com.mygdx.gameObjects.Sprite;
@@ -20,17 +19,20 @@ public class GameMenu {
 		game = newGame;
 		//Make start game button
 		Sprite startGameSprite = new Sprite("menu/startGame.png");
-		Point startGamePosition = new Point(20, Gdx.graphics.getHeight()-80);
+		Point startGamePosition = new Point(Gdx.graphics.getWidth()/2-startGameSprite.getCenterPx().x, 
+						                    Gdx.graphics.getHeight()-200);
 		startGameButton = new GameButton(startGamePosition,startGameSprite);
 		
 		//Make quit game button
 		Sprite quitGameSprite = new Sprite("menu/quitGame.png");
-		Point quitGamePosition = new Point(20, Gdx.graphics.getHeight()-160);
+		Point quitGamePosition = new Point(Gdx.graphics.getWidth()/2-quitGameSprite.getCenterPx().x, 
+								           quitGameSprite.getImage().getHeight()+50);
 		quitGameButton = new GameButton(quitGamePosition,quitGameSprite);
 		
 		//Make leaderboard button
 		Sprite leaderboardSprite = new Sprite("menu/leaderboard.png");
-		Point leaderboardPosition = new Point(20, Gdx.graphics.getHeight()-240);
+		Point leaderboardPosition = new Point(Gdx.graphics.getWidth()/2-leaderboardSprite.getCenterPx().x, 
+							                  Gdx.graphics.getHeight()-400);
 		leaderboardButton = new GameButton(leaderboardPosition,leaderboardSprite);
 	}
 	

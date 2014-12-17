@@ -1,7 +1,5 @@
 package com.mygdx.gamePhysics;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 
 public class CollisionController {
