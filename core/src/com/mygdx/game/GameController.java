@@ -1,6 +1,8 @@
 package com.mygdx.game;
 
 import java.awt.Point;
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -15,6 +17,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.mygdx.gameMenu.GameLeaderboard;
 import com.mygdx.gameObjects.GameObject;
 import com.mygdx.gameObjects.PlayerCharacter;
 import com.mygdx.gameObjects.Sprite;
@@ -38,22 +41,23 @@ public class GameController {
 	private int gameOverTimer;
 	private int gameOverTimeLimit;
 	//Misc
-	private int gameScore;
+	private long gameScore;
 	private boolean gameOver;
 	private Texture background;
 	private int backgroundScroll;
 	private int gameSpeed;
 	private int startGameSpeed;
+	private GameLeaderboard scoreboard;
 	
 	/*
 	 * Initializes game settings and values.
 	 */
 	public GameController(int newGameSpeed) throws Exception{
-		
 		mousePosition = new Point(0,0);
 		gameScore = 0;
 		gameSpeed = newGameSpeed;
 		startGameSpeed = newGameSpeed;
+		scoreboard = new GameLeaderboard();
 		
 		//Initialize Background
 		background = new Texture("backgrounds/gameBackground.bmp");
@@ -83,7 +87,7 @@ public class GameController {
 	/*
 	 * Game logic handled in here. Called in main render method.
 	 */
-	public void updateGame(){
+	public void updateGame() throws FileNotFoundException, UnsupportedEncodingException{
 		mousePosition.x = Gdx.input.getX();
 		mousePosition.y = ((Gdx.input.getY()-Gdx.graphics.getHeight())*-1);
 		backgroundScroll += gameSpeed;
@@ -108,10 +112,15 @@ public class GameController {
 		}
 		//Game over timer
 		if(gameOver){
+			if (gameScore > GameStates.GameScore)
+				GameStates.GameScore = gameScore;	
+			
 			gameSpeed=0;
 			gameOverTimer++;			
-			if(gameOverTimer>gameOverTimeLimit)
+			if(gameOverTimer>gameOverTimeLimit){
 				GameStates.State = GameStates.MENU;			
+			}
+				
 		}
 			
 		//make sure there are blocks in the array before processing
@@ -214,7 +223,7 @@ public class GameController {
 	public int getBackgroundScroll() {
 		return backgroundScroll;
 	}
-	public int getGameScore() {
+	public long getGameScore() {
 		return gameScore;
 	}
 	public int getGameSpeed(){

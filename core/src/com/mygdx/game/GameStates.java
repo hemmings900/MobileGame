@@ -8,4 +8,6 @@ public class GameStates {
 	public static final int QUIT = 3;
 	//Game state
 	public static int State;
+	//Current Score
+	public static long GameScore;
 }

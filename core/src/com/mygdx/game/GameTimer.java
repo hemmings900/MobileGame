@@ -1,5 +1,8 @@
 package com.mygdx.game;
 
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
+
 import com.badlogic.gdx.Gdx;
 
 /*
@@ -22,7 +25,7 @@ public class GameTimer {
 	 */
 	
 	//Update game
-	public void UpdateGameDuration(GameController game){		
+	public void UpdateGameDuration(GameController game) throws FileNotFoundException, UnsupportedEncodingException{		
 		double deltaTime = Gdx.graphics.getDeltaTime();//Time between last frame and current frame.
 		
 		//if current length of interval is longer than the limit set, reset interval.

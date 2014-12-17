@@ -1,8 +1,14 @@
 package com.mygdx.game;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
+import com.mygdx.gameMenu.GameLeaderboard;
 import com.mygdx.gameMenu.GameMenu;
 
 public class MyGdxGame extends ApplicationAdapter {
@@ -11,6 +17,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	private GameTimer timer;
 	private DrawingController draw;
 	private GameMenu menu;
+	private GameLeaderboard score;
 	
 	//Initialize Game
 	public void create () {
@@ -24,7 +31,13 @@ public class MyGdxGame extends ApplicationAdapter {
 			e.printStackTrace();
 		}
 		//Make new Game Menu
-				menu = new GameMenu(game);
+		menu = new GameMenu(game);
+		try {
+			score = new GameLeaderboard();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		draw = new DrawingController();
 		timer = new GameTimer(0.0166);
 		
@@ -43,10 +56,24 @@ public class MyGdxGame extends ApplicationAdapter {
 			draw.DrawGameMenu(menu);
 		//Render and update game if game is in START state
 		if(GameStates.State == GameStates.START){
-			timer.UpdateGameDuration(game);
+			try {
+				timer.UpdateGameDuration(game);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			draw.DrawGame(game);
 		}
-		//TO DO IMPLEMENT SCOREBOARD HERE
+		//Render scoreboard
+		if(GameStates.State == GameStates.LEADERBOARD){
+			draw.DrawScore(score);
+			if(Gdx.input.isKeyPressed(Keys.ESCAPE))
+				GameStates.State = GameStates.MENU;
+				
+		}
 		
 		//Close application if game is in QUIT state
 		if(GameStates.State == GameStates.QUIT){

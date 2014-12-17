@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.gameMenu.GameButton;
+import com.mygdx.gameMenu.GameLeaderboard;
 import com.mygdx.gameMenu.GameMenu;
 import com.mygdx.gameObjects.PlayerCharacter;
 import com.mygdx.gameObjects.Sprite;
@@ -18,12 +19,14 @@ public class DrawingController {
 	private SpriteBatch batch;
 	private SpriteBatch bgBatch;
 	private BitmapFont font;
+	
 
 	//Constructor
 	public DrawingController(){
 		font = new BitmapFont();
 		batch = new SpriteBatch();
 		bgBatch = new SpriteBatch();
+
 	}
 	public void DrawGameMenu(GameMenu menu){
 		GameButton[] buttonsToDraw = menu.GetButtons();		
@@ -79,5 +82,12 @@ public class DrawingController {
 		//END BATCH###################
 		batch.end();//################
 		//############################
+	}
+	
+	public void DrawScore(GameLeaderboard score){
+		Point center = new Point(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
+		batch.begin();		
+			font.draw(batch,"High Score: " + GameStates.GameScore,center.x,center.y);
+		batch.end();
 	}
 }
