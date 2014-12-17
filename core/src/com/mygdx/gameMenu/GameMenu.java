@@ -4,6 +4,7 @@ import java.awt.Point;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.game.GameController;
 import com.mygdx.game.GameStates;
 import com.mygdx.gameObjects.Sprite;
 import com.mygdx.gamePhysics.CollisionController;
@@ -13,9 +14,11 @@ public class GameMenu {
 	private GameButton quitGameButton;
 	private GameButton leaderboardButton;
 	private CollisionController collision;
+	private GameController game;
 	
-	public GameMenu(){
+	public GameMenu(GameController newGame){
 		collision = new CollisionController();
+		game = newGame;
 		//Make start game button
 		Sprite startGameSprite = new Sprite("menu/startGame.png");
 		Point startGamePosition = new Point(20, Gdx.graphics.getHeight()-80);
@@ -41,8 +44,10 @@ public class GameMenu {
 	public void ButtonClick(){
 		if(collision.isColliding(new Point(Gdx.input.getX(),
 										   Gdx.graphics.getHeight()-Gdx.input.getY()),
-								           startGameButton.getRect()))
+								           startGameButton.getRect())){
 			GameStates.State = GameStates.START;
+			game.ResetGame();
+		}
 		else
 		if(collision.isColliding(new Point(Gdx.input.getX(),
 										   Gdx.graphics.getHeight()-Gdx.input.getY()),

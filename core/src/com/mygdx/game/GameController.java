@@ -25,42 +25,55 @@ import com.mygdx.gamePhysics.CollisionController;
  */
 public class GameController {
 
+	//Game Objects
 	private PlayerCharacter player;
 	private Point mousePosition;
 	private BlockController blocks;
 	private CollisionController collisions;
+	//Timing variables
 	private int jumpTimer;
 	private int jumpTimeLimit;//Jump time limit is not based on amount of timer updates.
 	private int blockSpawnTimer;
 	private int blockSpawnTimeLimit;
+	private int gameOverTimer;
+	private int gameOverTimeLimit;
+	//Misc
 	private int gameScore;
 	private boolean gameOver;
 	private Texture background;
 	private int backgroundScroll;
 	private int gameSpeed;
+	private int startGameSpeed;
 	
 	/*
 	 * Initializes game settings and values.
 	 */
 	public GameController(int newGameSpeed) throws Exception{
+		
 		mousePosition = new Point(0,0);
 		gameScore = 0;
 		gameSpeed = newGameSpeed;
+		startGameSpeed = newGameSpeed;
+		
 		//Initialize Background
 		background = new Texture("backgrounds/gameBackground.bmp");
 		background.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
 		backgroundScroll = 0;
+		
 		//Initialize player
 		Texture img = new Texture("gameObjects/player.png");
 		Texture img2 = new Texture("gameObjects/playerCollision.png");
 		Texture img3 = new Texture("gameObjects/playerJump.png");
 		Sprite playerSprite = new Sprite(new Texture[]{img,img2,img3});
-		player = new PlayerCharacter(0,Gdx.graphics.getHeight()-100,5,playerSprite);
+		player = new PlayerCharacter(0,Gdx.graphics.getHeight()-100,3,playerSprite);
+		
 		//Initialize delay variables
 		jumpTimer = 0;
 		jumpTimeLimit = 30;
 		blockSpawnTimer = 0;
-		blockSpawnTimeLimit = 50;
+		blockSpawnTimeLimit = 50;		
+		gameOverTimer = 0;
+		gameOverTimeLimit = 50;
 		
 		//Initialize Blocks
 		blocks = new BlockController(gameSpeed,3);
@@ -84,16 +97,28 @@ public class GameController {
 		 * ##				GAME OBJECT PROCESSING						  ##
 		 * #################################################################
 		 */
+		//Block spawn timer
 		blockSpawnTimer++;
 		//If time interval is correct, make a row of blocks.
 		if (blockSpawnTimer > blockSpawnTimeLimit){
 			blocks.addRandomBlocks();
 			blockSpawnTimer = 0;
+			if(!gameOver)
+				gameScore++;
 		}
-		
+		//Game over timer
+		if(gameOver){
+			gameSpeed=0;
+			gameOverTimer++;			
+			if(gameOverTimer>gameOverTimeLimit)
+				GameStates.State = GameStates.MENU;			
+		}
+			
 		//make sure there are blocks in the array before processing
 		if (blocks.getBlocks() != null){
-			blocks.MoveBlocks();
+			if(!gameOver)
+				blocks.MoveBlocks();
+			
 			blocks.RemoveOutsideBlocks();
 			// Check if the player is touching an object
 			for (GameObject block : blocks.getBlocks()){
@@ -124,13 +149,43 @@ public class GameController {
 			}
 		}else if(collided){
 			player.getObjectSprite().setCurrentFrame(1);
+			gameOver = true;
 		}
 		else{
 			player.getObjectSprite().setCurrentFrame(0);
 		}			
 		Point playerPoint = new Point(mousePosition.x,Gdx.graphics.getHeight()-100);
-		player.FollowPoint(playerPoint);
-}
+		if(!gameOver)
+			player.FollowPoint(playerPoint);
+	}
+	
+	public void ResetGame(){
+		gameOver = false;
+		gameSpeed = startGameSpeed;
+		mousePosition = new Point(0,0);
+		gameScore = 0;		
+		//Initialize Background
+		background = new Texture("backgrounds/gameBackground.bmp");
+		background.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
+		backgroundScroll = 0;
+		
+		//Initialize player
+		player = new PlayerCharacter(0,Gdx.graphics.getHeight()-100,3,player.getObjectSprite());
+		
+		//Initialize delay variables
+		jumpTimer = 0;
+		jumpTimeLimit = 30;
+		blockSpawnTimer = 0;
+		blockSpawnTimeLimit = 50;		
+		gameOverTimer = 0;
+		gameOverTimeLimit = 50;
+		
+		//Initialize Blocks
+		blocks = new BlockController(gameSpeed,3);
+		collisions = new CollisionController();
+		
+	}
+
 	/*###################################################
 	 * Setters and getters for GameController          ##
 	 ###################################################*/
@@ -158,6 +213,12 @@ public class GameController {
 	}
 	public int getBackgroundScroll() {
 		return backgroundScroll;
+	}
+	public int getGameScore() {
+		return gameScore;
+	}
+	public int getGameSpeed(){
+		return gameSpeed;
 	}
 }
 

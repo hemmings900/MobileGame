@@ -53,8 +53,9 @@ public class DrawingController {
 		Point mousePosition = game.getMousePosition();
 		BlockController blocks = game.getBlocks();
 		Texture background = game.getBackground();
-		
-		//BEGIN BATCH#################
+		//####################################
+		//############BATCHES#################
+		//####################################
 		//Draw background
 		bgBatch.begin();
 		Point bg = new Point(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
@@ -62,8 +63,7 @@ public class DrawingController {
 		bgBatch.end();
 		//Draw Game
 		batch.begin();	
-//		font.draw(batch, "MousePosition " + mousePosition.x +":"+ mousePosition.y, 0, 40);
-//		font.draw(batch, "Blocks:"+blocks.getBlocks().size(), 0, 20);
+		font.draw(batch, "Score:"+game.getGameScore(), 0, Gdx.graphics.getHeight()-20);
 		
 		//Draw Player
 		batch.draw(playerSprite.getCurrentFrame(), player.getObjectX(),player.getObjectY());

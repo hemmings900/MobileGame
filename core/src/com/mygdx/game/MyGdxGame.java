@@ -16,8 +16,6 @@ public class MyGdxGame extends ApplicationAdapter {
 	public void create () {
 		//Set applicaiton screen size
 		Gdx.graphics.setDisplayMode(240, 320, false);
-		//Make new Game Menu
-		menu = new GameMenu();
 		//Make new Game, Game logic and drawing handled in this class.
 		try {
 			game = new GameController(3);
@@ -25,6 +23,8 @@ public class MyGdxGame extends ApplicationAdapter {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		//Make new Game Menu
+				menu = new GameMenu(game);
 		draw = new DrawingController();
 		timer = new GameTimer(0.0166);
 		
