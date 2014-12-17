@@ -30,7 +30,9 @@ public class DrawingController {
 		//BEGIN BATCH#################
 		batch.begin();//##############
 	    //############################
-		
+		//Draw Background
+		Point bg = new Point(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+		batch.draw(menu.getBackground(),0,0,0,0,bg.x,bg.y);
 		//Draw each button in GameButtons array
 		for(int i = 0; i < buttonsToDraw.length; i++){
 			GameButton button = buttonsToDraw[i];
