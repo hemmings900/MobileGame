@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.mygdx.game.android;
+package cycle.escape.android;
 
 public final class R {
     public static final class attr {

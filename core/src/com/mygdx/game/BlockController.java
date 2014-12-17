@@ -18,9 +18,12 @@ public class BlockController {
 	// chance for block to spawn is based on chance 1 out of X where X is blockChance.
 	private int blockChance;
 	private Random rand;
+	private Sprite blockSprite;
+	private int blocksWide;
 	
 	public BlockController(int newBlockSpeed, int newBlockChance){
-
+		blockSprite = new Sprite("gameObjects/block.png");
+		blocksWide = Gdx.graphics.getWidth()/blockSprite.getImage().getWidth();
 		rand = new Random();
 		blocks = new ArrayList<GameObject>();
 		blockSpeed = newBlockSpeed;
@@ -92,10 +95,9 @@ public class BlockController {
 	 * this should reduce spaghetti code)
 	 */
 	public void addRandomBlocks(){
-		Sprite newSprite = new Sprite("gameObjects/block.png");
+		
 		//Create array
-		int blocksToGenerate = Gdx.graphics.getWidth()/newSprite.getImage().getWidth();
-		boolean[] newBlockLine =  new boolean[blocksToGenerate];
+		boolean[] newBlockLine =  new boolean[blocksWide];
 		//Loop through array and add random values
 		for (int i = 0; i < newBlockLine.length; i++){
 			if (rand.nextInt(blockChance) == 1){
@@ -108,18 +110,12 @@ public class BlockController {
 		for (int i = 0; i < newBlockLine.length; i++){
 			if (newBlockLine[i]){
 				
-				BasicBlock newBlock = new BasicBlock(i*newSprite.getImage().getWidth(),
-													 0-newSprite.getImage().getHeight(),
-													 blockSpeed,newSprite);
+				BasicBlock newBlock = new BasicBlock(i*blockSprite.getImage().getWidth(),
+													 0-blockSprite.getImage().getHeight(),
+													 blockSpeed,blockSprite);
 				blocks.add(newBlock);
 			}
 		}		
-//		if (rand.nextInt(timeChance) == 1){
-//			int randomX = rand.nextInt(Gdx.graphics.getWidth());
-//			Sprite newSprite = new Sprite("block.png");
-//			GameObject newBlock = new BasicBlock(randomX,,blockSpeed,newSprite);
-//			blocks.add(newBlock);
-//			}
 	}
 	
 	/*#########################################################

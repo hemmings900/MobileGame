@@ -32,7 +32,7 @@ public class CycleEscapeMain extends ApplicationAdapter {
 		Gdx.graphics.setDisplayMode(240, 320, true);
 		//Make new Game, Game logic and drawing handled in this class.
 		try {
-			game = new GameController(3);
+			game = new GameController(5);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

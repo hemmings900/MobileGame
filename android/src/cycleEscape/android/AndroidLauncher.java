@@ -1,4 +1,4 @@
-package com.mygdx.game.android;
+package cycleEscape.android;
 
 import android.os.Bundle;
 

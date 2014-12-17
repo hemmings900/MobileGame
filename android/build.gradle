@@ -87,7 +87,7 @@ eclipse {
     }
 
     project {
-        name = appName + "-android"
+        name ="HemeGames-android"
         natures 'com.android.ide.eclipse.adt.AndroidNature'
         buildCommands.clear();
         buildCommand "com.android.ide.eclipse.adt.ResourceManagerBuilder"
