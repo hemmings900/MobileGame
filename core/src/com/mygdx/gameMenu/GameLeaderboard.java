@@ -17,6 +17,7 @@ public class GameLeaderboard {
 	
 	public void setBestScore(){
 		prefs.putLong("SCORE", GameStates.GameScore);
+		prefs.flush();
 	}
 	
 	public Texture getBackground(){

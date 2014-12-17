@@ -21,6 +21,7 @@ public class CycleEscapeMain extends ApplicationAdapter {
 	private float backButtonDelayLimit;
 	private boolean backButtonDisabled;
 	
+	
 	//Initialize Game
 	public void create () {
 		//Set back button Delay

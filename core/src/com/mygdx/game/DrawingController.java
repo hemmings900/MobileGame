@@ -1,7 +1,9 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Buttons;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,13 +18,14 @@ public class DrawingController {
 	private SpriteBatch batch;
 	private SpriteBatch bgBatch;
 	private BitmapFont font;
-	
+
 
 	//Constructor
 	public DrawingController(){
 		font = new BitmapFont();
 		batch = new SpriteBatch();
 		bgBatch = new SpriteBatch();
+
 
 	}
 	public void DrawGameMenu(GameMenu menu){
@@ -64,7 +67,7 @@ public class DrawingController {
 		bgBatch.end();
 		//Draw Game
 		batch.begin();	
-		font.draw(batch, "Score:"+game.getGameScore(), 0, Gdx.graphics.getHeight()-20);
+		
 		
 		//Draw Player
 		batch.draw(playerSprite.getCurrentFrame(), player.getObjectX(),player.getObjectY());
@@ -77,6 +80,20 @@ public class DrawingController {
 			batch.draw(blockImage,blockX,blockY);	
 			}			
 		}		
+		
+		//draw score
+		font.draw(batch, "Score:"+game.getGameScore(), 0, Gdx.graphics.getHeight()-20);
+		//draw tutorial
+		if(game.getIsTutorial()){
+			font.draw(batch,game.getTutorial(), 10,Gdx.graphics.getHeight()/2);
+		}
+		
+		//Draw Arrow
+		if(Gdx.input.isButtonPressed(Keys.LEFT)){
+			batch.draw(game.getArrow(),game.getArrowPos().x,game.getArrowPos().y);
+		}
+		else batch.draw(game.getArrow(),game.getArrowPos().x,game.getArrowPos().y);
+		
 		//END BATCH###################
 		batch.end();//################
 		//############################

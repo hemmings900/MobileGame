@@ -32,10 +32,23 @@ public class GameController {
 	private int blockSpawnTimeLimit;
 	private int gameOverTimer;
 	private int gameOverTimeLimit;
+	
+	private int tutorialTimer;
+	private int tutorialTimeLimit;
+	private String tutorial;
+	private boolean isTutorial;
 	//Misc
 	private long gameScore;
 	private boolean gameOver;
 	private Texture background;
+	private Texture arrow;
+	private Point arrowPos;
+	public Texture getArrow() {
+		return arrow;
+	}
+	public Point getArrowPos() {
+		return arrowPos;
+	}
 	private int backgroundScroll;
 	private int gameSpeed;
 	private int startGameSpeed;
@@ -44,11 +57,14 @@ public class GameController {
 	 * Initializes game settings and values.
 	 */
 	public GameController(int newGameSpeed) throws Exception{
+		
 		mousePosition = new Point(0,0);
 		gameScore = 0;
 		gameSpeed = newGameSpeed;
 		startGameSpeed = newGameSpeed;
-		
+		//arrow
+		arrow = new Texture("gameObjects/arrow.png");
+		arrowPos = new Point(0,0);
 		//Initialize Background
 		background = new Texture("backgrounds/gameBackground.bmp");
 		background.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
@@ -68,6 +84,11 @@ public class GameController {
 		blockSpawnTimeLimit = 100;		
 		gameOverTimer = 0;
 		gameOverTimeLimit = 50;
+		
+		tutorialTimer = 0;
+		tutorialTimeLimit = 80;
+		tutorial = "Drag the arrow to move.";
+		isTutorial = true;
 		
 		//Initialize Blocks
 		blocks = new BlockController(gameSpeed,2);
@@ -91,6 +112,13 @@ public class GameController {
 		 * ##				GAME OBJECT PROCESSING						  ##
 		 * #################################################################
 		 */
+		//Tutorial
+		if (tutorialTimer > tutorialTimeLimit)
+			isTutorial = false;
+		else
+			tutorialTimer++;
+			
+		
 		//Block spawn timer
 		blockSpawnTimer++;
 		//If time interval is correct, make a row of blocks.
@@ -155,6 +183,7 @@ public class GameController {
 		}			
 		Point playerPoint = new Point(mousePosition.x-player.getObjectSprite().getCenterPx().x,
 									  Gdx.graphics.getHeight()-100);
+		arrowPos = new Point(playerPoint.x,100);
 		if(!gameOver)
 			player.FollowPoint(playerPoint);
 	}
@@ -205,6 +234,7 @@ public class GameController {
 	public CollisionController getCollisions() {
 		return collisions;
 	}
+
 	
 	public boolean getGameOver(){
 		return gameOver;
@@ -220,6 +250,14 @@ public class GameController {
 	}
 	public int getGameSpeed(){
 		return gameSpeed;
+	}
+	
+	public String getTutorial(){
+		return tutorial;
+	}
+	
+	public Boolean getIsTutorial(){
+		return isTutorial;
 	}
 }
 
