@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.math.Rectangle;
@@ -58,7 +59,7 @@ public class GameController {
 		Texture img2 = new Texture("gameObjects/playerCollision.png");
 		Texture img3 = new Texture("gameObjects/playerJump.png");
 		Sprite playerSprite = new Sprite(new Texture[]{img,img2,img3});
-		player = new PlayerCharacter(0,Gdx.graphics.getHeight()-100,3,playerSprite);
+		player = new PlayerCharacter(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()-150,gameSpeed+5,playerSprite);
 		
 		//Initialize delay variables
 		jumpTimer = 0;
@@ -69,7 +70,7 @@ public class GameController {
 		gameOverTimeLimit = 50;
 		
 		//Initialize Blocks
-		blocks = new BlockController(gameSpeed,3);
+		blocks = new BlockController(gameSpeed,2);
 		collisions = new CollisionController();
 		
 	}
@@ -129,7 +130,7 @@ public class GameController {
 				}	
 			}
 		//Player action processing
-		if(Gdx.input.isButtonPressed(Buttons.LEFT)){
+		if(Gdx.input.isKeyJustPressed(Keys.LEFT)){
 			player.setIsJumping(true);
 		}
 		/*
@@ -157,7 +158,10 @@ public class GameController {
 		if(!gameOver)
 			player.FollowPoint(playerPoint);
 	}
-	
+	/*#############################################
+	 *##    RESET GAME							 ##
+	 *#############################################
+	 */
 	public void ResetGame(){
 		gameOver = false;
 		gameSpeed = startGameSpeed;
@@ -178,7 +182,7 @@ public class GameController {
 		gameOverTimer = 0;
 		
 		//Initialize Blocks
-		blocks = new BlockController(gameSpeed,3);
+		blocks = new BlockController(gameSpeed,blocks.getBlockChance());
 		collisions = new CollisionController();
 		
 	}
