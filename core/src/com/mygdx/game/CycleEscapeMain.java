@@ -17,18 +17,19 @@ public class CycleEscapeMain extends ApplicationAdapter {
 	private DrawingController draw;
 	private GameMenu menu;
 	private GameLeaderboard score;
-	private float backButtonDelay;
-	private float backButtonDelayLimit;
-	private boolean backButtonDisabled;
+	//private float backButtonDelay;
+	//private float backButtonDelayLimit;
+	//private boolean backButtonDisabled;
 	
 	
 	//Initialize Game
 	public void create () {
 		//Set back button Delay
 		Gdx.input.setCatchBackKey(true);
-		backButtonDelay = 0;
-		backButtonDelayLimit = 5000;
-		backButtonDisabled = false;
+		//backButtonDelay = 0;
+		//backButtonDelayLimit = 5000;
+		//backButtonDisabled = false;
+		
 		//Set application screen size
 		Gdx.graphics.setDisplayMode(240, 320, true);
 		//Make new Game, Game logic and drawing handled in this class.
@@ -50,14 +51,14 @@ public class CycleEscapeMain extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-		if (backButtonDisabled){
-			backButtonDelay+=Gdx.graphics.getDeltaTime();
-			backButtonDisabled = true;
-		}
-		if(backButtonDelay>backButtonDelayLimit){
-			backButtonDelay=0;
-			backButtonDisabled = false;
-		}
+//		if (backButtonDisabled){
+//			backButtonDelay+=Gdx.graphics.getDeltaTime();
+//			backButtonDisabled = true;
+//		}
+//		if(backButtonDelay>backButtonDelayLimit){
+//			backButtonDelay=0;
+//			backButtonDisabled = false;
+//		}
 		//GL stuff
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -77,19 +78,19 @@ public class CycleEscapeMain extends ApplicationAdapter {
 			}
 			draw.DrawGame(game);
 			
-			if(Gdx.input.isKeyPressed(Keys.ESCAPE) || Gdx.input.isKeyPressed(Keys.BACK) && !backButtonDisabled)
+			if(Gdx.input.isKeyPressed(Keys.ESCAPE) || Gdx.input.isKeyPressed(Keys.BACK))
 				GameStates.State = GameStates.MENU;			
 			
 		}
 		//Render scoreboard
 		if(GameStates.State == GameStates.LEADERBOARD){
 			draw.DrawScore(score);
-			if(Gdx.input.isKeyPressed(Keys.ESCAPE) || Gdx.input.isKeyPressed(Keys.BACK) && !backButtonDisabled)
+			if(Gdx.input.isKeyPressed(Keys.ESCAPE) || Gdx.input.isKeyPressed(Keys.BACK))
 				GameStates.State = GameStates.MENU;				
 		}
 		
 		//Close application if game is in QUIT state
-		if(GameStates.State == GameStates.QUIT && !backButtonDisabled){
+		if(GameStates.State == GameStates.QUIT){
 			System.exit(0);
 			
 		}

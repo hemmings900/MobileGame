@@ -25,16 +25,13 @@ public class GameController {
 	private Point mousePosition;
 	private BlockController blocks;
 	private CollisionController collisions;
-	//Timing variables
-	private int jumpTimer;
-	private int jumpTimeLimit;//Jump time limit is not based on amount of timer updates.
-	private int blockSpawnTimer;
-	private int blockSpawnTimeLimit;
-	private int gameOverTimer;
-	private int gameOverTimeLimit;
+	//delays	
+	private DelayCounter jumpDelay;
+	private DelayCounter blockSpawnDelay;
+	private DelayCounter gameOverDelay;
+	private DelayCounter tutorialDelay;
 	
-	private int tutorialTimer;
-	private int tutorialTimeLimit;
+	//tutorial
 	private String tutorial;
 	private boolean isTutorial;
 	//Misc
@@ -78,15 +75,13 @@ public class GameController {
 		player = new PlayerCharacter(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()-150,gameSpeed+5,playerSprite);
 		
 		//Initialize delay variables
-		jumpTimer = 0;
-		jumpTimeLimit = 30;
-		blockSpawnTimer = 0;
-		blockSpawnTimeLimit = 100;		
-		gameOverTimer = 0;
-		gameOverTimeLimit = 50;
 		
-		tutorialTimer = 0;
-		tutorialTimeLimit = 80;
+		jumpDelay = new DelayCounter(30);
+		blockSpawnDelay = new DelayCounter(100);
+		gameOverDelay = new DelayCounter(50);
+		tutorialDelay = new DelayCounter(150);
+		
+		//Tutorial
 		tutorial = "Drag the arrow to move.";
 		isTutorial = true;
 		
@@ -113,29 +108,22 @@ public class GameController {
 		 * #################################################################
 		 */
 		//Tutorial
-		if (tutorialTimer > tutorialTimeLimit)
-			isTutorial = false;
-		else
-			tutorialTimer++;
-			
+		if (tutorialDelay.UpdateCounter())
+			isTutorial = false;			
 		
-		//Block spawn timer
-		blockSpawnTimer++;
 		//If time interval is correct, make a row of blocks.
-		if (blockSpawnTimer > blockSpawnTimeLimit){
+		if (blockSpawnDelay.UpdateCounter()){
 			blocks.addRandomBlocks();
-			blockSpawnTimer = 0;
 			if(!gameOver)
 				gameScore++;
 		}
-		//Game over timer
+		
+		//Game over handling
 		if(gameOver){
 			if (gameScore > GameStates.GameScore)
-				GameStates.GameScore = gameScore;	
-			
-			gameSpeed=0;
-			gameOverTimer++;			
-			if(gameOverTimer>gameOverTimeLimit){
+				GameStates.GameScore = gameScore;				
+			gameSpeed=0;			
+			if(gameOverDelay.UpdateCounter()){
 				GameStates.State = GameStates.MENU;			
 			}
 				
@@ -166,15 +154,11 @@ public class GameController {
 		 * Change the sprite image based on state of player.
 		 */
 		if(player.isJumping()){
-			if(jumpTimer > jumpTimeLimit){
+			if(jumpDelay.UpdateCounter())
 				player.setIsJumping(false);
-				jumpTimer = 0;
-			}
-			else{			
-			player.getObjectSprite().setCurrentFrame(2);
-			jumpTimer++;
-			}
-		}else if(collided){
+			else		
+				player.getObjectSprite().setCurrentFrame(2);
+		} else if(collided){
 			player.getObjectSprite().setCurrentFrame(1);
 			gameOver = true;
 		}
@@ -187,6 +171,7 @@ public class GameController {
 		if(!gameOver)
 			player.FollowPoint(playerPoint);
 	}
+	
 	/*#############################################
 	 *##    RESET GAME							 ##
 	 *#############################################
@@ -205,10 +190,10 @@ public class GameController {
 		player = new PlayerCharacter(0,Gdx.graphics.getHeight()-100,3,player.getObjectSprite());
 		
 		//Initialize delay variables
-		jumpTimer = 0;
-		jumpTimeLimit = 30;
-		blockSpawnTimer = 0;	
-		gameOverTimer = 0;
+		jumpDelay = new DelayCounter(30);
+		blockSpawnDelay = new DelayCounter(100);
+		gameOverDelay = new DelayCounter(50);
+		tutorialDelay = new DelayCounter(150);
 		
 		//Initialize Blocks
 		blocks = new BlockController(gameSpeed,blocks.getBlockChance());
