@@ -1,10 +1,6 @@
 package com.mygdx.game;
 
-import java.io.FileNotFoundException;
-import java.io.UnsupportedEncodingException;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
@@ -74,8 +70,7 @@ public class GameController {
 		Sprite playerSprite = new Sprite(new Texture[]{img,img2,img3});
 		player = new PlayerCharacter(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()-150,gameSpeed+5,playerSprite);
 		
-		//Initialize delay variables
-		
+		//Initialize delay variables		
 		jumpDelay = new DelayCounter(30);
 		blockSpawnDelay = new DelayCounter(100);
 		gameOverDelay = new DelayCounter(50);
@@ -87,15 +82,21 @@ public class GameController {
 		
 		//Initialize Blocks
 		blocks = new BlockController(gameSpeed,2);
-		collisions = new CollisionController();
-		
+		collisions = new CollisionController();	
 	}
+	
+	
 	/*
 	 * Game logic handled in here. Called in main render method.
 	 */
 	public void updateGame(){
+		//Set mouse/touch position
 		mousePosition.x = Gdx.input.getX();
 		mousePosition.y = ((Gdx.input.getY()-Gdx.graphics.getHeight())*-1);
+		//Set arrow location
+		arrowPos = new Point(Gdx.input.getX()-arrow.getWidth()/2,100);
+		
+		//Background
 		backgroundScroll += gameSpeed;
 		if(backgroundScroll > background.getHeight())
 			backgroundScroll = 0;
@@ -125,8 +126,7 @@ public class GameController {
 			gameSpeed=0;			
 			if(gameOverDelay.UpdateCounter()){
 				GameStates.State = GameStates.MENU;			
-			}
-				
+			}				
 		}
 			
 		//make sure there are blocks in the array before processing
@@ -164,10 +164,11 @@ public class GameController {
 		}
 		else{
 			player.getObjectSprite().setCurrentFrame(0);
-		}			
+		}		
+		
+		//Set position of player
 		Point playerPoint = new Point(mousePosition.x-player.getObjectSprite().getCenterPx().x,
 									  Gdx.graphics.getHeight()-100);
-		arrowPos = new Point(playerPoint.x,100);
 		if(!gameOver)
 			player.FollowPoint(playerPoint);
 	}
@@ -198,7 +199,6 @@ public class GameController {
 		//Initialize Blocks
 		blocks = new BlockController(gameSpeed,blocks.getBlockChance());
 		collisions = new CollisionController();
-		
 	}
 
 	/*###################################################

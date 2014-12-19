@@ -11,7 +11,6 @@ public abstract class GameObject {
 	private int objectY;
 	private Sprite objectSprite;
 	private int objectSpeed;
-	//private BoundingBox boundingBox;
 	
 	public GameObject(int startX, int startY, int startMoveSpeed,Sprite startSprite){
 		objectX = startX;
