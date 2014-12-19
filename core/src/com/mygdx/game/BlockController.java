@@ -23,7 +23,7 @@ public class BlockController {
 	
 	public BlockController(int newBlockSpeed, int newBlockChance){
 		blockSprite = new Sprite("gameObjects/block.png");
-		blocksWide = Gdx.graphics.getWidth()/blockSprite.getImage().getWidth();
+		blocksWide = Gdx.graphics.getWidth()/blockSprite.getImage().getWidth()+1;
 		rand = new Random();
 		blocks = new ArrayList<GameObject>();
 		blockSpeed = newBlockSpeed;

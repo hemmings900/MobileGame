@@ -31,7 +31,7 @@ public class CycleEscapeMain extends ApplicationAdapter {
 		//backButtonDisabled = false;
 		
 		//Set application screen size
-		Gdx.graphics.setDisplayMode(240, 320, true);
+		Gdx.graphics.setDisplayMode(600, 800, true);
 		//Make new Game, Game logic and drawing handled in this class.
 		try {
 			game = new GameController(5);
